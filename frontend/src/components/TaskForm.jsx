@@ -40,16 +40,26 @@ export default function TaskForm({ onAdd }) {
           <option value="medium">🟡 Medium</option>
           <option value="high">🔴 High</option>
         </select>
-        <input
-          type="date"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-        />
-        <input
-          type="time"
-          value={dueTime}
-          onChange={(e) => setDueTime(e.target.value)}
-        />
+      </div>
+      <div className="form-row">
+        <div className="input-wrapper">
+          <span className="input-icon">📅</span>
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+            placeholder="Select date"
+          />
+        </div>
+        <div className="input-wrapper">
+          <span className="input-icon">⏰</span>
+          <input
+            type="time"
+            value={dueTime}
+            onChange={(e) => setDueTime(e.target.value)}
+            placeholder="Select time"
+          />
+        </div>
       </div>
       <button type="submit">+ Add Task</button>
     </form>
