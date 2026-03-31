@@ -1,26 +1,40 @@
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function TaskForm({ onAdd }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("medium");
-  const [dueDate, setDueDate] = useState("");
-  const [dueTime, setDueTime] = useState("");
+  const [priority, setPriority] = useState("");
+  const [dateTime, setDateTime] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) return;
-    onAdd({ title, description, priority, dueDate: dueDate || null, dueTime: dueTime || null });
+
+    onAdd({
+      title,
+      description,
+      priority: priority || "medium",
+      dueDate: dateTime
+        ? dateTime.toISOString().split("T")[0]
+        : null,
+      dueTime: dateTime
+        ? dateTime.toTimeString().slice(0, 5)
+        : null,
+    });
+
+    // Reset fields
     setTitle("");
     setDescription("");
-    setPriority("medium");
-    setDueDate("");
-    setDueTime("");
+    setPriority("");
+    setDateTime(null);
   };
 
   return (
     <form className="task-form" onSubmit={handleSubmit}>
       <h2>Add New Task</h2>
+
       <input
         type="text"
         placeholder="Task title *"
@@ -28,39 +42,41 @@ export default function TaskForm({ onAdd }) {
         onChange={(e) => setTitle(e.target.value)}
         required
       />
+
       <textarea
         placeholder="Description (optional)"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         rows={2}
       />
+
       <div className="form-row">
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+        {/* Priority */}
+        <select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value)}
+          className={`custom-select ${priority === "" ? "dim" : ""}`}
+        >
+          <option value="" disabled>
+            Select priority
+          </option>
           <option value="low">🟢 Low</option>
           <option value="medium">🟡 Medium</option>
           <option value="high">🔴 High</option>
         </select>
+
+        {/* Date + Time Picker */}
+        <DatePicker
+          selected={dateTime}
+          onChange={(date) => setDateTime(date)}
+          showTimeSelect
+          timeIntervals={30}
+          dateFormat="dd MMM yyyy h:mm aa"
+          placeholderText="Select date & time"
+          className="custom-datepicker"
+        />
       </div>
-      <div className="form-row">
-        <div className="input-wrapper">
-          <span className="input-icon">📅</span>
-          <input
-            type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-            placeholder="Select date"
-          />
-        </div>
-        <div className="input-wrapper">
-          <span className="input-icon">⏰</span>
-          <input
-            type="time"
-            value={dueTime}
-            onChange={(e) => setDueTime(e.target.value)}
-            placeholder="Select time"
-          />
-        </div>
-      </div>
+
       <button type="submit">+ Add Task</button>
     </form>
   );
