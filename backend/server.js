@@ -12,7 +12,8 @@ app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://taskflow-j2qy2kf35-sheemasalahs-projects.vercel.app",
-    /\.vercel\.app$/  // allows any vercel preview URLs too
+    "https://taskflow-six-ebon.vercel.app",
+    /\.vercel\.app$/
   ],
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: true
