@@ -34,7 +34,8 @@ Fields used:
 
 ## API Endpoints
 
-Base URL: `http://localhost:5000/api`
+Base URL (Local): http://localhost:5000/api  
+Base URL (Production): https://taskflow-backend-sg4b.onrender.com/api
 
 * GET `/tasks` → fetch all tasks
 * POST `/tasks` → create a new task
@@ -109,8 +110,16 @@ The focus was on maintaining a simple structure and ensuring usability across di
 AI tools such as ChatGPT were used for assistance with syntax, debugging, and improving code structure.
 The overall logic and implementation decisions were defined during development, while AI was used to refine and optimize parts of the code.
 
-## Notes
+## Live link
 
-* Time is stored as a string (HH:MM) for simplicity
-* Authentication is not included in this version
-* A single collection is used due to the limited scope of the application
+Frontend: https://taskflow-six-ebon.vercel.app/  
+Backend: https://taskflow-backend-sg4b.onrender.com/
+
+### Environment Variables (Frontend)
+
+Create a `.env` file inside the `frontend` folder and add:
+
+VITE_API_URL=https://taskflow-backend-sg4b.onrender.com/api
+
+If running locally without this, the app will default to:
+http://localhost:5000/api
