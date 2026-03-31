@@ -8,7 +8,15 @@ const taskRoutes = require("./routes/tasks");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://taskflow-j2qy2kf35-sheemasalahs-projects.vercel.app",
+    /\.vercel\.app$/  // allows any vercel preview URLs too
+  ],
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
