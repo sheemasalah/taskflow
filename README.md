@@ -123,3 +123,11 @@ VITE_API_URL=https://taskflow-backend-sg4b.onrender.com/api
 
 If running locally without this, the app will default to:
 http://localhost:5000/api
+
+## Design Decisions & Assumptions
+
+- Time is stored as a string (HH:MM) instead of a Date object for simplicity in handling and display.
+- A single collection (`tasks`) is used as the application scope is limited and does not require relational data.
+- No authentication is implemented as it was not required for the scope of this assignment.
+- The application is designed for single-user usage.
+- Priority levels are fixed (low, medium, high) to keep the UI simple and consistent.
