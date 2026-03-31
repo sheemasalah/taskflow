@@ -68,7 +68,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>✅ TaskFlow</h1>
+        <h1>TaskFlow</h1>
         <p>Stay organized, stay ahead.</p>
       </header>
       <main className="app-main">
